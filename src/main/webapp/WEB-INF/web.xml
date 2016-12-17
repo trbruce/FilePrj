@@ -14,7 +14,28 @@
     <servlet-mapping>
         <servlet-name>yla</servlet-name>
         <url-pattern>*.do</url-pattern>
+        <url-pattern>/download/external/*</url-pattern>
+        <url-pattern>/download/internal/*</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UploadFile</servlet-name>
+        <servlet-class>com.yla.fileupload.UploadFile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadFile</servlet-name>
+        <url-pattern>/UploadFile</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>UploadDownloadFileServlet</servlet-name>
+        <servlet-class>com.yla.fileupload.UploadDownloadFileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadDownloadFileServlet</servlet-name>
+        <url-pattern>/UploadDownloadFileServlet</url-pattern>
     </servlet-mapping>
 
     <context-param>
@@ -27,5 +48,24 @@
             org.springframework.web.context.ContextLoaderListener
         </listener-class>
     </listener>
+
+    <context-param>
+        <param-name>tempfile.dir</param-name>
+        <param-value>tmpfiles</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>upload.dir</param-name>
+        <param-value>uploadfiles</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>fileFilter</filter-name>
+        <filter-class>com.yla.controller.FileRequestFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>fileFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

@@ -7,7 +7,7 @@
                            http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd
                            http://www.springframework.org/schema/mvc      http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.yla.controller" />
+    <context:component-scan base-package="com.yla.controller, com.yla.queue" />
     <mvc:annotation-driven  />
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -15,6 +15,42 @@
                   value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- =============================================== -->
+    <!-- JMS Common, Define JMS connectionFactory       -->
+    <!-- =============================================== -->
+    <!-- Activemq connection factory -->
+    <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <!-- brokerURL, You may have different IP or port -->
+        <constructor-arg index="0" value="tcp://localhost:61616" />
+    </bean>
+
+    <!-- Pooled Spring connection factory -->
+    <bean id="connectionFactory"
+          class="org.springframework.jms.connection.CachingConnectionFactory">
+        <constructor-arg ref="amqConnectionFactory" />
+    </bean>
+
+    <!-- ======================================================= -->
+    <!-- JMS Send, define default destination and JmsTemplate    -->
+    <!-- ======================================================= -->
+    <!-- Default Destination Queue Definition -->
+    <bean id="defaultDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <!-- name of the queue -->
+        <constructor-arg index="0" value="Send2Recv" />
+    </bean>
+
+    <!-- JmsTemplate Definition -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="defaultDestination" ref="defaultDestination" />
+    </bean>
+
+    <bean id = "messageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destinationName" value="Send2Recv"/>
+        <property name="messageListener" ref="jmsMessageListener"/>
     </bean>
 
 
