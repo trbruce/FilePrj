@@ -29,7 +29,7 @@ public class FileRequestFilter implements Filter {
         //path is /upload.do10:50:49.250
         //if (path.toLowerCase().contains("do")) {
 
-        logLoginUser(request);
+       // logLoginUser(request);
         filterChain.doFilter(servletRequest, servletResponse);
         //  } else {
         //    filterChain.doFilter(servletRequest, servletResponse);

@@ -1,127 +1,230 @@
-
-
+<%--
+  Created by IntelliJ IDEA.
+  User: Yusuf
+  Date: 03/01/2017
+  Time: 23:20
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
+<%--
+  Created by IntelliJ IDEA.
+  User: Yusuf
+  Date: 03/01/2017
+  Time: 21:25
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>File Services</title>
-    <meta name="keywords" content="Media file converter, File downloader, Video to mp4,  video downloader,  video converter, download  videos, download music,
-free conversion, free online conversion, free file conversion, free online file conversion, video converter, audio converter"/>
-    <meta name="description" content="Free online video converter, audio converter, Convert  videos to MP3, MP4 in HD with our  Converter and Downloader. No software download needed. Easy, fast and free!"/>
-    <meta name="robots" content="index, follow">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="http://malsup.github.com/jquery.form.js" ></script>
-    <script src="js/fileUploadScript.js" ></script>
-    <script type="application/javascript" src="http://jsonip.appspot.com/?callback=getip">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-9243924041723557",
+            enable_page_level_ads: true
+        });
     </script>
+
+    <title>Video File Transformer</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content=" File converter,  downloader,  to mp4,  video downloader,  video converter, download  videos, download YouTube"/>
+    <meta name="description" content="Convert File  videos to MP3, MP4 in HD with our  Converter and Downloader. No software download needed. Easy, fast and free!"/>
+    <meta name="robots" content="index, follow">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 450px}
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+            .row.content {height:auto;}
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <h2>Convert  Video and Music Files</h2>
-    <table class="table">
-    <tr>
-        <td>
-                     <form id="UploadForm" action="./upload.do" method="post" enctype="multipart/form-data">
-                            <table class="table">
-                                <tr class="success">
-                                    <td>
-                                       1.<input type="file" size="60" id="myfile" name="myfile">
-                                    </td>
-                                </tr>
-                                <tr class="info">
-                                    <td>
-                                       2.<input type="submit" value="Upload File">
-                                    </td>
-                                </tr>
-                                <tr  class="info">
-                                    <td>
-                                        <div id="progressbox" class="progress">
-                                            <div id="progressbar" class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:10%"></div>
-                                            <div id="percent">0%</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
 
-        </td>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">File Transformer</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li ><a href="${pageContext.request.contextPath}/videoformats.do">Video Formats</a></li>
+                <li><a href="${pageContext.request.contextPath}/faq.do">FAQ</a></li>
+                <li><a href="${pageContext.request.contextPath}/contact.do">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="${pageContext.request.contextPath}/login.do"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-        <td>
-            <form  method="POST" action="./convert.do" id="frmConvert" name ="frmConvert">
-                    <table  class="table">
-                        <tr class="success">
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <p><a href="https://twitter.com/">Twitter</a></p>
+            <p><a href="https://www.youtube.com/">Youtube</a></p>
+            <p><a href="https://www.instagram.com">Instagram</a></p>
+        </div>
+        <div class="col-sm-8 text-left">
+
+            <div class="col-sm-12 text-left">
+
+
+                <table class="table">
+                    <tr>
+                        <td colspan="2" class="container">Press <mark>Choose File</mark> button, to select your local file , Press <b>Upload Button</b> after selecting the file. Select the type of the file you want to be converted and press <b>Convert</b> button. After conversion is complete you may press <b>Download</b> button to get the converted file:</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <form id="UploadForm" action="${pageContext.request.contextPath}/upload.do" method="post" enctype="multipart/form-data">
+                                <table class="table">
+                                    <tr class="success">
+                                        <td>
+                                            <input type="file" size="60" id="myfile" name="myfile">
+                                        </td>
+                                    </tr>
+                                    <tr class="info">
+                                        <td>
+                                            <input type="submit" value="Upload File">
+                                        </td>
+                                    </tr>
+                                    <tr  class="info">
+                                        <td>
+                                            <div id="progressbox" class="progress">
+                                                <div id="progressbar" class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:10%"></div>
+                                                <div id="percent">0%</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </form>
+
+                        </td>
+
+                        <td>
+                            <form  method="POST" action="${pageContext.request.contextPath}/convert.do" id="frmConvert" name ="frmConvert">
+                                <table  class="table">
+                                    <tr class="success">
+                                        <td>
+                                            Convert to <span id="fileformat">MP4</span></p>
+                                            <select  name="format_choice" id="format_choice" onchange="$('#fileformat').html(this.value)">
+                                                <option value="mp4">MP4(.mp4) iPod/iPhone/PSP</option>
+                                                <option value="avi">AVI(.avi)</option>
+                                                <option value="flv">FLV(.flv)</option>
+                                                <option value="mpg">MPEG-1(.mpg)</option>
+                                                <option value="swf">Flash(.swf)</option>
+                                                <option value="wmv">Windows Media Video (.wmv)</option>
+                                                <option value="ogv">Ogv (.ogv)</option>
+                                                <option value="dv">DV video(.dv)</option>
+                                                <option value="mov">MOV(.mov)</option>
+                                                <option value="3gp">3GP/3G2 Video (.3gp)</option>
+                                                <option value="mjpeg">(Motion JPEG) (.mjpeg)</option>
+                                                <option value="gif">Animation (.gif)</option>
+                                                <option value="dvd">MPEG-2 PS(DVD VOB) (.dvd)</option>
+                                                <option value="mp3">MPEG audio layer 3 (.mp3)</option>
+                                                <option value="wav">WAV(.wav)</option>
+                                                <option value="ogg">Ogg (.ogg)</option>
+                                                <option value="wma">ASF Audio (.wma)</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr  class="info">
+                                        <td><input type="submit" id="btnConvert" name="btnConvert" value="Convert" onclick="" style="cursor:pointer"/></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr  class="danger">
+                        <form  method="POST" action="${pageContext.request.contextPath}/download.do" id="frmdownload" name ="frmdownload">
                             <td>
-                                    Convert to <span id="fileformat">MP4</span></p>
-                                    <select  name="format_choice" id="format_choice" onchange="$('#fileformat').html(this.value)">
-                                        <option value="mp4">MP4(.mp4) iPod/iPhone/PSP</option>
-                                        <option value="avi">AVI(.avi)</option>
-                                        <option value="flv">FLV(.flv)</option>
-                                        <option value="mpg">MPEG-1(.mpg)</option>
-                                        <option value="swf">Flash(.swf)</option>
-                                        <option value="wmv">Windows Media Video (.wmv)</option>
-                                        <option value="ogv">Ogv (.ogv)</option>
-                                        <option value="dv">DV video(.dv)</option>
-                                        <option value="mov">MOV(.mov)</option>
-                                        <option value="3gp">3GP/3G2 Video (.3gp)</option>
-                                        <option value="mjpeg">(Motion JPEG) (.mjpeg)</option>
-                                        <option value="gif">Animation (.gif)</option>
-                                        <option value="dvd">MPEG-2 PS(DVD VOB) (.dvd)</option>
-                                        <option value="mp3">MPEG audio layer 3 (.mp3)</option>
-                                        <option value="wav">WAV(.wav)</option>
-                                        <option value="ogg">Ogg (.ogg)</option>
-                                        <option value="wma">ASF Audio (.wma)</option>
-                                    </select>
+                                <input type="hidden" id="filename" value="${fileName}"/>
+
+                                <input type="text"  hidden readonly value="${fileName}"/>
                             </td>
-                        </tr>
-                         <tr  class="info">
-                            <td>3.<input type="submit" id="btnConvert" name="btnConvert" value="Convert" onclick="" style="cursor:pointer"/></td>
-                        </tr>
-
-                        <tr>
-                            <td></td>
-                        </tr>
-                    </table>
-                </form>
-            </td>
-    </tr>
-    <tr  class="danger">
-        <form  method="POST" action="./download.do" id="frmdownload" name ="frmdownload">
-        <td>
-            <input type="hidden" id="filename" value="${fileName}"/>
-
-            <input type="text"  hidden readonly value="${fileName}"/>
-        </td>
-        <td>
-           4.<input type="submit" id="btnDownload" name="btnDownload" value="Download" onclick="" style="cursor:pointer"/>
-        </td>
-
-        </form>
-    </tr>
-        <tr class="active">
-            <td colspan="2">
-                <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=GB&source=ac&ref=tf_til&ad_type=product_link&tracking_id=httpwwwfiletr-21&marketplace=amazon&region=GB&placement=B00CTVTJ4Q&asins=B00CTVTJ4Q&linkId=&show_border=true&link_opens_in_new_window=true">
-                </iframe>
-
-            </td>
-
-        </tr>
+                            <td>
+                                <input type="submit" id="btnDownload" name="btnDownload" value="Download" onclick="" style="cursor:pointer"/>
+                            </td>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
+                    </tr>
+                    <tr>
+                        <td colspan="2">This website lets you convert media  from one format to another. We support a lot of different source formats, just try. Supported types are <strong>"mp4","avi","flv","mpg","swf","wmv","ogv","dv","mov",,"3gp","mpeg","gif","dvd","mp3","wav","ogg","wma"</strong> , please let us know and write us an e-mail. We probably can help you</td>
+                    </tr>
 
 
-</table>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <p><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- filetransormerR1 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9243924041723557"
+                         data-ad-slot="6786098624"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script></p>
+            </div>
+            <div class="well">
+                <p>TBD</p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script type="application/javascript">
-    var ipaddress;
-    function getip(json){
-        alert(json.ip); // alerts the ip address
-        ipaddress = json.ip;
-    }
-</script>
+<footer class="container-fluid text-center">
+    <p>File Transformer</p>
+</footer>
 
 </body>
 </html>
-

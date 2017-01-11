@@ -16,10 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,22 +36,21 @@ import java.util.List;
  */
 @Controller
 @Service
-public class FileController {
+public class FileController implements FileControllerInt{
 
-    private static org.slf4j.Logger slogger = LoggerFactory.getLogger(FileController.class);
+   // private static org.slf4j.Logger slogger = LoggerFactory.getLogger(FileController.class);
 
     private Logger logger = Logger.getLogger(FileController.class);
 
 
     @RequestMapping("/")
     public ModelAndView checkFileURLex() {
-        slogger.info("Logger Name: "+slogger.getName() + " method: checkFileURLex + request /url ");
+        //slogger.info("Logger Name: "+slogger.getName() + " method: checkFileURLex + request /url ");
 
         String message = "<br><div style='text-align:center;'>"
                 + "<h3>***Please upload the file to convert***</h3></div><br><br>";
 
-        //resolve to /WEb-INF/jsp/welcome.jsp
-        System.out.println("checkFileURLex method");
+
         return new ModelAndView("welcome","message",message);
 
     }
@@ -62,13 +59,14 @@ public class FileController {
     @ResponseBody
     public ModelAndView welcome(HttpServletRequest request,
                                      @RequestParam(value="texturl", required=false) String texturl) {
-        slogger.info("Logger Name: "+slogger.getName() + " method: welcome() + request /welcome  ");
+     //   slogger.info("Logger Name: "+slogger.getName() + " method: welcome() + request /welcome  ");
 
         String message = "<br><div style='text-align:center;'>"
                 + "<h3>***Please upload the file to convert***</h3></div><br><br>";
 
-        //resolve to /WEb-INF/jsp/welcome.jsp
-        logger.warn("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!WARN LOG4J elcome method!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        //resolve to /WEb-INF/jsp/welcome1.0.jsp
+        logger.info(logger.getName()+ " /welcome");
+
         return new ModelAndView("welcome","message",message);
 
     }
@@ -81,9 +79,9 @@ public class FileController {
     JmsMessageSender  jmsMessageSender;
 
     @RequestMapping("/upload.do")
+    @ResponseBody
     public ModelAndView uploadFile(HttpServletRequest request, HttpServletResponse response,ModelMap model) throws IOException{
-        slogger.info("Logger Name: "+slogger.getName() + " method: uploadFile + request /upload  ");
-
+       logger.info(logger.getName()+"  /upload.do ");
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         String message ="";
         String fileName="";
@@ -105,7 +103,6 @@ public class FileController {
                     }
                 }
                  message = "File Uploaded, Now it will be converted and ready for Download!...";
-                slogger.info("Logger Name: "+slogger.getName() + message);
                 //put the converted file ınto queue
                 // get bean from context
                 // send to default destination
@@ -113,7 +110,6 @@ public class FileController {
                 String fileType = YLAStringUtils.getFileType(fileName);
                 String hfileName =  YLAStringUtils.replaceSpaces(YLAStringUtils.getFilename(fileName));
                 String convertType = request.getParameter("format_choice");
-                slogger.info("Logger Name: "+slogger.getName() +" convert type is"+ convertType);
                 ylaFile = new YLAFile(hfileName,fileType,convertType, YLAParameters.getUploadDir(request),YLAParameters.getDestinationDir(request));
                 request.getSession().setAttribute("fileObj",ylaFile);
                 model.addAttribute("fileName",hfileName+"."+fileType);
@@ -122,7 +118,8 @@ public class FileController {
             catch (Exception e)
             {
                 e.printStackTrace();
-                System.out.println("File upload failed");
+                logger.error(logger.getName());
+                logger.error(e);
                  message ="File upload failed";
             }
         }
@@ -138,7 +135,7 @@ public class FileController {
     @RequestMapping("/downloadex.do")//method = RequestMethod.GET)
     public void doDownloadex(HttpServletRequest request,
                            HttpServletResponse response) throws IOException {
-        slogger.info("Logger Name: "+slogger.getName() + " method: download + request /download  ");
+        //slogger.info("Logger Name: "+slogger.getName() + " method: download + request /download  ");
 
         String filePath = "";//"/upLoadFiles/32.Essential Russian Grammar.pdf";
 
@@ -190,12 +187,12 @@ public class FileController {
         String message = "Conversion completed";
         YLAFile ylaFile = (YLAFile) request.getSession().getAttribute("fileObj");;
         String convertType = request.getParameter("format_choice");
-        slogger.info("Logger Name: "+slogger.getName() +" convert type is"+ convertType);
+       // slogger.info("Logger Name: "+slogger.getName() +" convert type is"+ convertType);
         if (ylaFile != null) {
             ylaFile.setFileDestinationType(convertType);
         }
         else{
-            slogger.info("Please select a file and upload");
+      //      slogger.info("Please select a file and upload");
             message = "Please select a file and upload";
         }
         jmsMessageSender.sendToFileQueue(ylaFile);
@@ -204,16 +201,60 @@ public class FileController {
     }
 
     @RequestMapping("/download.do")//method = RequestMethod.GET)
-    public ModelAndView doDownload(HttpServletRequest request,
+    public void doDownload(HttpServletRequest request,
                            HttpServletResponse response) throws IOException {
-        slogger.info("Logger Name: " + slogger.getName() + " method: download + request /download  ");
+      //  slogger.info("Logger Name: " + slogger.getName() + " method: download + request /download  ");
         try {
             DownloadFile.download(request,response);
         } catch (Exception e) {
-            slogger.error(e.toString());
+       //     slogger.error(e.toString());
             e.printStackTrace();
+           String message = "Still in progress";
+           // return new ModelAndView("welcome","message",message);
         }
         String message = "download completed";
-        return new ModelAndView("welcome","message2",message);
+       // return new ModelAndView("welcome","message2",message);
+    }
+
+    @RequestMapping("/videoformats.do")//(value ="/welcome", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView videoFormats(HttpServletRequest request,
+                                @RequestParam(value="texturl", required=false) String texturl) {
+      //  slogger.info("Logger Name: "+slogger.getName() + " method: welcome() + request /welcome  ");
+
+        String message = "<br><div style='text-align:center;'>"
+                + "<h3>***Please upload the file to convert***</h3></div><br><br>";
+
+        //resolve to /WEb-INF/jsp/welcome1.0.jsp
+       return new ModelAndView("videoformats","message",message);
+
+    }
+
+    @RequestMapping("/faq.do")//(value ="/welcome", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView faq(HttpServletRequest request,
+                                     @RequestParam(value="texturl", required=false) String texturl) {
+     //   slogger.info("Logger Name: "+slogger.getName() + " method: welcome() + request /welcome  ");
+
+        String message = "<br><div style='text-align:center;'>"
+                + "<h3>***Please upload the file to convert***</h3></div><br><br>";
+
+        //resolve to /WEb-INF/jsp/welcome1.0.jsp
+        return new ModelAndView("FAQ","message",message);
+
+    }
+
+    @RequestMapping("/contact.do")//(value ="/welcome", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView welcomev2(HttpServletRequest request,
+                            @RequestParam(value="texturl", required=false) String texturl) {
+    //    slogger.info("Logger Name: "+slogger.getName() + " method: welcome() + request /welcome  ");
+
+        String message = "<br><div style='text-align:center;'>"
+                + "<h3>***Please upload the file to convert***</h3></div><br><br>";
+
+        //resolve to /WEb-INF/jsp/welcome1.0.jsp
+        return new ModelAndView("contact","message",message);
+
     }
 }
