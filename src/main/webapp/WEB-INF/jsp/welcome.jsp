@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%--
   Created by IntelliJ IDEA.
   User: Yusuf
@@ -71,30 +72,8 @@
     </style>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">File Transformer</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li ><a href="${pageContext.request.contextPath}/videoformats.do">Video Formats</a></li>
-                <li><a href="${pageContext.request.contextPath}/faq.do">FAQ</a></li>
-                <li><a href="${pageContext.request.contextPath}/contact.do">Contact</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="${pageContext.request.contextPath}/login.do"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <div class="container-fluid text-center">
     <div class="row content">
@@ -110,12 +89,12 @@
 
                 <table class="table">
                     <tr>
-                        <td colspan="2" class="container">Press <mark>Choose File</mark> button, to select your local file , Press <b>Upload Button</b> after selecting the file. Select the type of the file you want to be converted and press <b>Convert</b> button. After conversion is complete you may press <b>Download</b> button to get the converted file:</td>
+                        <td colspan="2" class="container"><spring:message code="main.explanation"/></td>
                     </tr>
 
                     <tr>
                         <td>
-                            <form id="UploadForm" action="${pageContext.request.contextPath}/upload.do" method="post" enctype="multipart/form-data">
+                            <form id="UploadForm" action="${pageContext.request.contextPath}/upload.do" method="post" enctype="multipart/form-data" >
                                 <table class="table">
                                     <tr class="success">
                                         <td>
@@ -194,7 +173,7 @@
                         </form>
                     </tr>
                     <tr>
-                        <td colspan="2">This website lets you convert media  from one format to another. We support a lot of different source formats, just try. Supported types are <strong>"mp4","avi","flv","mpg","swf","wmv","ogv","dv","mov",,"3gp","mpeg","gif","dvd","mp3","wav","ogg","wma"</strong> , please let us know and write us an e-mail. We probably can help you</td>
+                        <td colspan="2"><spring:message code="main.note1"/> <strong><spring:message code="main.note2"/></strong> <spring:message code="main.note3"/></td>
                     </tr>
 
 
@@ -223,7 +202,7 @@
 </div>
 
 <footer class="container-fluid text-center">
-    <p>File Transformer</p>
+    <p><spring:message code="menu.logo"/></p>
 </footer>
 
 </body>
