@@ -1,0 +1,150 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Yusuf
+  Date: 03/01/2017
+  Time: 07:53
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Yusuf
+  Date: 03/01/2017
+  Time: 21:25
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-9243924041723557",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <title>File Transformers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content=" File converter,  downloader,  to mp4,  video downloader,  video converter, download  videos, download YouTube"/>
+    <meta name="description" content="Convert File  videos to MP3, MP4 in HD with our  Converter and Downloader. No software download needed. Easy, fast and free!"/>
+    <meta name="robots" content="index, follow">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 450px}
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+            .row.content {height:auto;}
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">File Transformer</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li ><a href="${pageContext.request.contextPath}/welcome.do">Home</a></li>
+                <li ><a href="${pageContext.request.contextPath}/videoformats.do">Video Formats</a></li>
+                <li ><a href="${pageContext.request.contextPath}/faq.do">FAQ</a></li>
+                <li class="active"><a href="#">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="${pageContext.request.contextPath}/login.do"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <p><a href="https://twitter.com/">Twitter</a></p>
+            <p><a href="https://www.youtube.com/">Youtube</a></p>
+            <p><a href="https://www.instagram.com">Instagram</a></p>
+        </div>
+        <div class="col-sm-8 text-left">
+            <h1>Contact Us</h1>
+
+            <hr>
+
+            <div class="col-sm-8 text-left ">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">Email</a>
+                    <a href="mailto:files.transformers@gmail.com?Subject=Hello%20again" class="list-group-item" target="_top">Send Email</a>
+                    <a href="#" class="list-group-item active">Twitter</a>
+                    <a href="https://twitter.com/filetransformer" class="list-group-item">Twit to us</a>
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <p><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- filetransormerR1 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9243924041723557"
+                         data-ad-slot="6786098624"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script></p>
+            </div>
+            <div class="well">
+                <p>TBD</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="container-fluid text-center">
+    <p>File Transformer</p>
+</footer>
+
+</body>
+</html>
