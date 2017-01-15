@@ -40,14 +40,12 @@ import java.util.Locale;
 @Service
 public class FileController implements FileControllerInt {
 
-    // private static org.slf4j.Logger slogger = LoggerFactory.getLogger(FileController.class);
 
     private Logger logger = Logger.getLogger(FileController.class);
 
 
     @RequestMapping("/")
     public ModelAndView checkFileURLex() {
-        //slogger.info("Logger Name: "+slogger.getName() + " method: checkFileURLex + request /url ");
 
         String message = "<br><div style='text-align:center;'>"
                 + "<h3>***Please upload the file to convert***</h3></div><br><br>";
@@ -60,7 +58,6 @@ public class FileController implements FileControllerInt {
     @RequestMapping("/welcome")//(value ="/welcome", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView welcome(Locale locale, Model model) {//     HttpServletRequest request,@RequestParam(value="texturl", required=false) String texturl) {
-        //   slogger.info("Logger Name: "+slogger.getName() + " method: welcome() + request /welcome  ");
 
 
         //resolve to /WEb-INF/jsp/welcome1.0.jsp
@@ -143,56 +140,7 @@ public class FileController implements FileControllerInt {
     //file download
     private static final int BUFFER_SIZE = 4096;
 
-    @RequestMapping("/downloadex.do")//method = RequestMethod.GET)
-    public void doDownloadex(HttpServletRequest request,
-                             HttpServletResponse response) throws IOException {
-        //slogger.info("Logger Name: "+slogger.getName() + " method: download + request /download  ");
 
-        String filePath = "";//"/upLoadFiles/32.Essential Russian Grammar.pdf";
-
-        // get absolute path of the application
-        ServletContext context = request.getSession().getServletContext();
-        String appPath = context.getRealPath("");
-        System.out.println("appPath = " + appPath);
-
-        // construct the complete absolute path of the file
-        String fullPath = appPath + filePath;
-        File downloadFile = new File(fullPath);
-        FileInputStream inputStream = new FileInputStream(downloadFile);
-
-        // get MIME type of the file
-        String mimeType = context.getMimeType(fullPath);
-        if (mimeType == null) {
-            // set to binary type if MIME mapping not found
-            mimeType = "application/octet-stream";
-        }
-        System.out.println("MIME type: " + mimeType);
-
-        // set content attributes for the response
-        response.setContentType(mimeType);
-        response.setContentLength((int) downloadFile.length());
-
-        // set headers for the response
-        String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"",
-                downloadFile.getName());
-        response.setHeader(headerKey, headerValue);
-
-        // get output stream of the response
-        OutputStream outStream = response.getOutputStream();
-
-        byte[] buffer = new byte[BUFFER_SIZE];
-        int bytesRead = -1;
-
-        // write bytes read from the input stream into the output stream
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outStream.write(buffer, 0, bytesRead);
-        }
-
-        inputStream.close();
-        outStream.close();
-
-    }
 
     @RequestMapping("/convert.do")
     public ModelAndView convertFile(HttpServletRequest request, HttpServletResponse response) {
@@ -200,11 +148,9 @@ public class FileController implements FileControllerInt {
         YLAFile ylaFile = (YLAFile) request.getSession().getAttribute("fileObj");
         ;
         String convertType = request.getParameter("format_choice");
-        // slogger.info("Logger Name: "+slogger.getName() +" convert type is"+ convertType);
         if (ylaFile != null) {
             ylaFile.setFileDestinationType(convertType);
         } else {
-            //      slogger.info("Please select a file and upload");
             message = "Please select a file and upload";
         }
         jmsMessageSender.sendToFileQueue(ylaFile);
@@ -215,16 +161,28 @@ public class FileController implements FileControllerInt {
     @RequestMapping("/download.do")//method = RequestMethod.GET)
     public void doDownload(HttpServletRequest request,
                            HttpServletResponse response) throws IOException {
-        //  slogger.info("Logger Name: " + slogger.getName() + " method: download + request /download  ");
+
+        logger.info(logger.getName() + " /download  BEGIN");
         try {
-            DownloadFile.download(request, response);
+            //check whether the file is selected in the app
+            if (request.getSession().getAttribute("fileObj")!= null) {
+                DownloadFile.download(request, response);
+            }
+            else{
+                //The file is not attached yet to the session
+                response.sendRedirect(request.getRequestURI().substring(0,request.getRequestURI().indexOf("/",2))+"/welcome.do");
+                //response.sendRedirect("welcome.do");
+                //return new ModelAndView("redirect:/myURL");
+            }
         } catch (Exception e) {
             //     slogger.error(e.toString());
             e.printStackTrace();
             String message = "Still in progress";
+            response.sendRedirect(request.getRequestURI().substring(0,request.getRequestURI().indexOf("/",2))+"/welcome.do");
             // return new ModelAndView("welcome","message",message);
         }
         String message = "download completed";
+        logger.info(logger.getName() + " /download  END");
         // return new ModelAndView("welcome","message2",message);
     }
 
@@ -232,7 +190,6 @@ public class FileController implements FileControllerInt {
     @ResponseBody
     public ModelAndView videoFormats(HttpServletRequest request,
                                      @RequestParam(value = "texturl", required = false) String texturl) {
-        //  slogger.info("Logger Name: "+slogger.getName() + " method: welcome() + request /welcome  ");
 
         String message = "<br><div style='text-align:center;'>"
                 + "<h3>***Please upload the file to convert***</h3></div><br><br>";
@@ -246,7 +203,6 @@ public class FileController implements FileControllerInt {
     @ResponseBody
     public ModelAndView faq(HttpServletRequest request,
                             @RequestParam(value = "texturl", required = false) String texturl) {
-        //   slogger.info("Logger Name: "+slogger.getName() + " method: welcome() + request /welcome  ");
 
         String message = "<br><div style='text-align:center;'>"
                 + "<h3>***Please upload the file to convert***</h3></div><br><br>";
@@ -260,7 +216,6 @@ public class FileController implements FileControllerInt {
     @ResponseBody
     public ModelAndView welcomev2(HttpServletRequest request,
                                   @RequestParam(value = "texturl", required = false) String texturl) {
-        //    slogger.info("Logger Name: "+slogger.getName() + " method: welcome() + request /welcome  ");
 
         String message = "<br><div style='text-align:center;'>"
                 + "<h3>***Please upload the file to convert***</h3></div><br><br>";

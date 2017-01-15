@@ -8,11 +8,11 @@
             </button>
 
             <spring:message code="menu.logo" var="lblLogo" />
-            <a class="navbar-brand" href="#">${lblLogo}</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/welcome.do">${lblLogo}</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#"> <spring:message code="menu.home"/></a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/welcome.do"> <spring:message code="menu.home"/></a></li>
                 <li ><a href="${pageContext.request.contextPath}/videoformats.do"><spring:message code="menu.videoformats"/></a></li>
                 <li><a href="${pageContext.request.contextPath}/faq.do"><spring:message code="menu.FAQ"/></a></li>
                 <li><a href="${pageContext.request.contextPath}/contact.do"><spring:message code="menu.contact"/></a></li>

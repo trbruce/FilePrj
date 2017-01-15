@@ -86,8 +86,11 @@
 
             <div class="col-sm-12 text-left">
 
+                <h3><spring:message code="main.introduction"/></h3>
+
 
                 <table class="table">
+
                     <tr>
                         <td colspan="2" class="container"><spring:message code="main.explanation"/></td>
                     </tr>
@@ -103,7 +106,8 @@
                                     </tr>
                                     <tr class="info">
                                         <td>
-                                            <input type="submit" value="Upload File">
+                                            <spring:message code="main.uploadfile" var="lblUpload" />
+                                            <input type="submit" value="${lblUpload}">
                                         </td>
                                     </tr>
                                     <tr  class="info">
@@ -125,7 +129,7 @@
                                 <table  class="table">
                                     <tr class="success">
                                         <td>
-                                            Convert to <span id="fileformat">MP4</span></p>
+                                            <spring:message code="main.convertto"/> <span id="fileformat">MP4</span></p>
                                             <select  name="format_choice" id="format_choice" onchange="$('#fileformat').html(this.value)">
                                                 <option value="mp4">MP4(.mp4) iPod/iPhone/PSP</option>
                                                 <option value="avi">AVI(.avi)</option>
@@ -148,7 +152,8 @@
                                         </td>
                                     </tr>
                                     <tr  class="info">
-                                        <td><input type="submit" id="btnConvert" name="btnConvert" value="Convert" onclick="" style="cursor:pointer"/></td>
+                                        <spring:message code="main.convert" var="lblConvert" />
+                                        <td><input type="submit" id="btnConvert" name="btnConvert" value="${lblConvert}" onclick="" style="cursor:pointer"/></td>
                                     </tr>
 
                                     <tr>
@@ -167,7 +172,8 @@
                                 <input type="text"  hidden readonly value="${fileName}"/>
                             </td>
                             <td>
-                                <input type="submit" id="btnDownload" name="btnDownload" value="Download" onclick="" style="cursor:pointer"/>
+                                <spring:message code="main.download" var="lblDownload" />
+                                <input type="submit" id="btnDownload" name="btnDownload" value="${lblDownload}" onclick="" style="cursor:pointer"/>
                             </td>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </form>
@@ -188,7 +194,7 @@
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-9243924041723557"
-                         data-ad-slot="6786098624"
+                         data-ad-slot="8948025821"
                          data-ad-format="auto"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});

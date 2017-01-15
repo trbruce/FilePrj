@@ -18,8 +18,7 @@ public interface FileControllerInt {
     public ModelAndView welcome(Locale locale, Model model);//HttpServletRequest request,
                                 //@RequestParam(value="texturl", required=false) String texturl);
     public ModelAndView uploadFile(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws IOException;
-    public void doDownloadex(HttpServletRequest request,
-                             HttpServletResponse response) throws IOException;
+
     public ModelAndView convertFile(HttpServletRequest request, HttpServletResponse response);
     public void doDownload(HttpServletRequest request,
                            HttpServletResponse response) throws IOException;

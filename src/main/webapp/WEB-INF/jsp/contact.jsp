@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%--
   Created by IntelliJ IDEA.
   User: Yusuf
@@ -79,17 +80,24 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">File Transformer</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/welcome.do"><spring:message code="menu.logo"/></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li ><a href="${pageContext.request.contextPath}/welcome.do">Home</a></li>
-                <li ><a href="${pageContext.request.contextPath}/videoformats.do">Video Formats</a></li>
-                <li ><a href="${pageContext.request.contextPath}/faq.do">FAQ</a></li>
-                <li class="active"><a href="#">Contact</a></li>
+                <li ><a href="${pageContext.request.contextPath}/welcome.do"><spring:message code="menu.home"/></a></li>
+                <li ><a href="${pageContext.request.contextPath}/videoformats.do"><spring:message code="menu.videoformats"/></a></li>
+                <li ><a href="${pageContext.request.contextPath}/faq.do"><spring:message code="menu.FAQ"/></a></li>
+                <li class="active"><a href="#"><spring:message code="menu.contact"/></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="${pageContext.request.contextPath}/login.do"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <spring:message code="menu.language" var="lblLanguage" /><spring:message code="menu.english" var="lblEnglish" />
+                <spring:message code="menu.french" var="lblFrench" />
+                <li>${lblLanguage}</li>
+                <li><a href="?lang=en">${lblEnglish}</a></li>
+                <li> <a href="?lang=fr">${lblFrench}</a></li>
+                <!--   <li>Current Locale : ${pageContext.response.locale} / ${locale}
+                </li> -->
+                <li><a href="${pageContext.request.contextPath}/login.do"><span class="glyphicon glyphicon-log-in"></span><spring:message code="menu.login"/></a></li>
             </ul>
         </div>
     </div>
@@ -103,16 +111,16 @@
             <p><a href="https://www.instagram.com">Instagram</a></p>
         </div>
         <div class="col-sm-8 text-left">
-            <h1>Contact Us</h1>
+            <h1><spring:message code="contact.contactus"/></h1>
 
             <hr>
 
             <div class="col-sm-8 text-left ">
                 <div class="list-group">
                     <a href="#" class="list-group-item active">Email</a>
-                    <a href="mailto:files.transformers@gmail.com?Subject=Hello%20again" class="list-group-item" target="_top">Send Email</a>
+                    <a href="mailto:files.transformers@gmail.com?Subject=Hello%20again" class="list-group-item" target="_top"><spring:message code="contact.email"/></a>
                     <a href="#" class="list-group-item active">Twitter</a>
-                    <a href="https://twitter.com/filetransformer" class="list-group-item">Twit to us</a>
+                    <a href="https://twitter.com/filetransformer" class="list-group-item"><spring:message code="contact.twit"/></a>
 
 
                 </div>
@@ -129,7 +137,7 @@
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-9243924041723557"
-                         data-ad-slot="6786098624"
+                         data-ad-slot="8948025821"
                          data-ad-format="auto"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
@@ -143,7 +151,7 @@
 </div>
 
 <footer class="container-fluid text-center">
-    <p>File Transformer</p>
+    <p><spring:message code="menu.logo"/></p>
 </footer>
 
 </body>

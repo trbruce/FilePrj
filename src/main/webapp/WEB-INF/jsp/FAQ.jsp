@@ -76,7 +76,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><spring:message code="menu.logo"/></a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/welcome.do"><spring:message code="menu.logo"/></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -108,7 +108,7 @@
         </div>
         <div class="col-sm-8 text-left">
             <h1><spring:message code="faq.title" />(FAQ)</h1>
-
+            <spring:message code="main.introduction"/>
             <hr>
 
             <div class="col-sm-8 text-left ">
@@ -130,11 +130,12 @@
         <div class="col-sm-2 sidenav">
             <div class="well">
                 <p><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- filetransformer1 -->
+                    <!-- filetransormerR1 -->
                     <ins class="adsbygoogle"
-                         style="display:inline-block;width:728px;height:90px"
+                         style="display:block"
                          data-ad-client="ca-pub-9243924041723557"
-                         data-ad-slot="3832632223"></ins>
+                         data-ad-slot="8948025821"
+                         data-ad-format="auto"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script></p>
