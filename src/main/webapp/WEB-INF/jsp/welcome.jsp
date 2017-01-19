@@ -69,7 +69,31 @@
             }
             .row.content {height:auto;}
         }
+        .modal-content {
+            color: #000;
+        }
     </style>
+
+    <!-- field control javascripts -->
+    <script type="text/javascript">
+        function validateFileExtension(fld) {
+            if(!/(\.avi|\.flv|\.mp4|\.mpeg)$/i.test(fld.value)) {
+                //alert("Invalid image file type.");
+               // document.getElementsByName('myfile').
+               // $('#uploadmessage').val("Please select a media file to upload!....");
+               // $('#uploadlabel').text("Please select a media file to upload!....");
+               // $("#my-div").show();
+                var canvas = document.getElementById("my-div");
+                canvas.style.display = 'block';
+                fld.form.reset();
+                fld.focus();
+                return false;
+            }
+            canvas.style.display = 'none';
+            return true;
+        } </script>
+    <!-- field control javascripts -->
+
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -107,7 +131,10 @@
                                     <tr class="info">
                                         <td>
                                             <spring:message code="main.uploadfile" var="lblUpload" />
-                                            <input type="submit" value="${lblUpload}">
+                                            <input type="button" value="${lblUpload}" onclick="return validateFileExtension(document.getElementsByName('myfile'))">
+                                            <div   id="my-div" class="alert alert-warning"  style="display: none;">
+                                                <strong>Warning!</strong> Please select a valid media file
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr  class="info">
